@@ -1,0 +1,143 @@
+<!-- node/index.html / Peer Node -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Peer Node</title>
+  <script src="https://cdn.jsdelivr.net/npm/omnitone@1.3.0/build/omnitone.min.js"></script>
+  <link rel="stylesheet" href="./style-node.css">
+</head>
+
+<body>
+  <div class="shell">
+
+    <!-- Header -->
+    <header>
+      <a href="/" class="btn" id="homeBtn">Home</a>
+      <h1>Peer Node</h1>
+      <button class="btn spatial-toggle" id="spatialToggleBtn" type="button">Spatial Controls</button>
+    </header>
+
+    <!-- State Bar -->
+    <div class="state-bar">
+      <div class="dot" id="dot"></div>
+      <span id="stateText">idle</span>
+    </div>
+
+    <!-- Signaling Server Config -->
+    <div class="section" aria-labelledby="signaling-title">
+      <div id="signaling-title" class="label">Signaling Server</div>
+      <div class="row">
+        <input type="text" id="wsUrl" placeholder="ws://your-server:8080" style="flex:1">
+        <input type="text" id="roomId" value="room-1" placeholder="room id" style="max-width:130px">
+      </div>
+    </div>
+
+    <!-- Spatial Controls -->
+    <div id="spatialControls" class="section spatial-panel" style="display:none">
+      <div class="label">Spatial Controls</div>
+
+      <div class="spatial-row">
+        <span class="spatial-label">Azimuth</span>
+        <input type="range" id="azimuthSlider" min="-180" max="180" step="1" value="0">
+        <span class="spatial-value" id="azimuthValue">0°</span>
+      </div>
+
+      <div class="spatial-row">
+        <span class="spatial-label">Elevation</span>
+        <input type="range" id="elevationSlider" min="-90" max="90" step="1" value="0">
+        <span class="spatial-value" id="elevationValue">0°</span>
+      </div>
+
+      <div class="spatial-row">
+        <span class="spatial-label">Gain</span>
+        <input type="range" id="gainSlider" min="-60" max="24" step="1" value="0">
+        <span class="spatial-value" id="gainValue">0 dB</span>
+      </div>
+    </div>
+
+    <!-- Audio Input -->
+    <div class="section" aria-labelledby="input-title">
+      <div id="input-title" class="label">Audio Input</div>
+      <div class="row" style="align-items: center;">
+        <button class="btn" id="scanBtn" type="button">Scan Devices</button>
+        <button id="wsBridgeBtn" class="btn" type="button">Connect WS Bridge</button>
+        <span id="chInfo"></span>
+        <select id="frameSizeSelect" class="btn" style="display: none; margin-left: auto; background: #222;">
+          <option value="120">120 - 2.5ms</option>
+          <option value="240">240 - 5ms</option>
+          <option value="480">480 - 10ms</option>
+          <option value="960" selected>960 - 20ms</option>
+          <option value="1920">1920 - 40ms</option>
+          <option value="2880">2880 - 60ms</option>
+        </select>
+      </div>
+      <div class="device-list" id="deviceList"></div>
+    </div>
+
+    <!-- Controls -->
+    <div class="section" aria-labelledby="control-title">
+      <div id="control-title" class="label">Controls</div>
+      <div class="row">
+        <button class="btn primary" id="connectBtn" type="button">Connect</button>
+        <button class="btn success" id="playBtn" type="button" disabled>Play Audio</button>
+        <button class="btn danger" id="stopBtn" type="button" disabled>Stop</button>
+        <button class="btn success" id="recordBtn" type="button" disabled style="margin-left:auto">Record</button>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="section" aria-labelledby="stats-title">
+      <div id="stats-title" class="label">Stats</div>
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="stat-label" id="statRttLabel">RTT</div>
+          <div class="stat-value" id="statRtt">—</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Median Jitter</div>
+          <div class="stat-value" id="statJitter">—</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Prebuffer</div>
+          <div class="stat-value" id="statPrebuffer">—</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">TX Buffer Pressure</div>
+          <div class="stat-value" id="statTxBuf">—</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">TX Packets</div>
+          <div class="stat-value" id="statTxPkts">—</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">RX Packets, Lost %</div>
+          <div class="stat-value" id="statRxPkts">—</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">TX Bitrate</div>
+          <div class="stat-value" id="statTxBitrate">—</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">RX Bitrate</div>
+          <div class="stat-value" id="statRxBitrate">—</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Log -->
+    <div class="section" aria-labelledby="log-title">
+      <div class="log-header">
+        <div id="log-title" class="label">Log</div>
+        <button class="btn clear-log-btn" id="clearLogBtn" type="button">Clear Log</button>
+      </div>
+      <div id="log"></div>
+    </div>
+
+  </div>
+  <script type="module" src="app-node.js"></script>
+</body>
+
+</html>
