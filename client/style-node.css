@@ -1,0 +1,262 @@
+body {
+  background-color: #121212;
+  color: #e0e0e0;
+  font-family: monospace;
+  padding: 20px;
+  margin: 0;
+  overflow-y: scroll;
+}
+
+.shell {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+header {
+  border-bottom: 1px solid #444;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #c8f542;
+}
+
+#spatialToggleBtn {
+  font-size: 0.85rem;
+}
+
+.section {
+  margin-bottom: 20px;
+}
+
+.label {
+  font-size: 0.8rem;
+  color: #aaa;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+input {
+  background: #222;
+  border: 1px solid #555;
+  color: #fff;
+  padding: 6px 10px;
+  font-family: monospace;
+}
+
+.btn {
+  background: #333;
+  border: 1px solid #555;
+  color: #fff;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-family: monospace;
+}
+.btn:hover { background: #444; }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn.primary { border-color: #c8f542; color: #c8f542; }
+.btn.primary:hover { background: #c8f542; color: #000; }
+.btn.success { border-color: #42c8f5; color: #42c8f5; }
+.btn.success:hover { background: #42c8f5; color: #000; }
+.btn.danger { border-color: #ff4545; color: #ff4545; }
+.btn.danger:hover { background: #ff4545; color: #000; }
+.btn.selected { border-color: #42c8f5; color: #42c8f5; }
+.btn.connected { border-color: #c8f542; color: #c8f542; }
+.btn.loading {
+  cursor: wait !important;
+  opacity: 0.75;
+  border-color: #fa0 !important;
+  color: #fa0 !important;
+}
+
+.device-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 10px;
+}
+.device-item {
+  background: #222;
+  border: 1px solid #444;
+  color: #fff;
+  padding: 8px 12px;
+  cursor: pointer;
+  text-align: left;
+  font-family: monospace;
+  font-size: 0.8rem;
+}
+.device-item:hover { background: #333; }
+.device-item.selected {
+  border-color: #c8f542;
+  color: #c8f542;
+  cursor: default;
+}
+
+#deviceList.has-selection .device-item:not(.selected) {
+  display: none;
+}
+
+/* Audio Output device buttons: inline, to the right of the Scan button on the
+   same row (the input list above is vertical). After a pick, has-selection
+   collapses the row to just the chosen device. */
+#outputDeviceList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+#outputDeviceList.has-selection .device-item:not(.selected) {
+  display: none;
+}
+.state-bar {
+  background: #1e1e1e;
+  padding: 10px;
+  border: 1px solid #333;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #555;
+  flex-shrink: 0;
+}
+.dot.active { background: #0f0; animation: pulse 1.8s infinite; }
+.dot.error { background: #f00; }
+.dot.waiting { background: #fa0; }
+
+@keyframes pulse {
+  0%,
+  100% { opacity: 1 }
+  50% { opacity: .35 }
+}
+
+#stateText {
+  color: #aaa;
+  font-size: 0.9rem;
+}
+
+/* Stats */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+.stat-box {
+  background: #1a1a1a;
+  border: 1px solid #333;
+  padding: 8px 10px;
+}
+.stat-label {
+  font-size: 0.6rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 4px;
+}
+.stat-value {
+  font-size: 0.9rem;
+  color: #c8f542;
+  font-weight: bold;
+}
+.stat-value.warn { color: #fa0; }
+.stat-value.alert { color: #f00; }
+
+#chInfo {
+  font-size: 0.65rem;
+  color: #888;
+  align-self: center;
+}
+.log-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 5px;
+}
+.log-header .label { margin-bottom: 0; }
+.clear-log-btn { padding: 3px 8px; font-size: 0.7rem; }
+
+#log {
+  background: #000;
+  border: 1px solid #333;
+  height: 150px;
+  overflow-y: auto;
+  padding: 10px;
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+.ts { color: #666; }
+.ok { color: #c8f542; }
+.err { color: #f00; }
+.inf { color: #0af; }
+
+.btn.recording {
+  border-color: #fa0 !important;
+  color: #fa0 !important;
+  cursor: wait !important;
+  animation: pulse 1.2s infinite;
+}
+.btn.playing {
+  border-color: #c8f542;
+  color: #c8f542;
+  cursor: default;
+}
+.btn.spatial-toggle.active { border-color: #f5a623; color: #f5a623; }
+ 
+.spatial-panel {
+  background: #1a1a1a;
+  border: 1px solid #3a3a3a;
+  padding: 14px 16px;
+  border-radius: 2px;
+}
+ 
+.spatial-row {
+  display: grid;
+  grid-template-columns: 80px 1fr 64px;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.spatial-row:last-child { margin-bottom: 0; }
+ 
+.spatial-label {
+  font-size: 0.75rem;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+ 
+.spatial-row input[type="range"] {
+  accent-color: #f5a623;
+  cursor: pointer;
+  width: 100%;
+  /* The generic input rule applies padding: 6px 10px; on a range input that
+     horizontal padding insets the thumb's travel from both ends, so the knob
+     stops short of min/max. Zero it (and the 2px UA margin) so it reaches the
+     track edges. */
+  margin: 0;
+  padding: 0;
+}
+ 
+.spatial-value {
+  font-size: 0.8rem;
+  color: #f5a623;
+  text-align: right;
+  font-weight: bold;
+  min-width: 56px;
+}

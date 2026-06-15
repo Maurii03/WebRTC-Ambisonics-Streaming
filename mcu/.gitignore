@@ -1,0 +1,6 @@
+# Compiled binary (produced by `go build ./cmd/mcu` at the module root).
+# Anchored with a leading slash so it does NOT match the cmd/mcu/ source dir.
+/mcu
+# Go test/coverage artifacts
+*.out
+*.test
